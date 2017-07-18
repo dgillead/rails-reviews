@@ -53,4 +53,14 @@ describe HomeController do
       expect(response.body).to include("Register a New User")
     end
   end
+
+  describe "GET /login" do
+    it "renders the login form" do
+      get :login
+
+      expect(response.body).to include("Log In")
+      expect(response.body).to include("Email")
+      expect(response.body).to include("Password")
+    end
+  end
 end
