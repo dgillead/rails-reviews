@@ -63,4 +63,16 @@ describe HomeController do
       expect(response.body).to include("Password")
     end
   end
+
+  describe "POST /login" do
+   let!(:user) { User.create!(name: "Dan", email: "test@codeplatoon.com", password: "abc1234") }
+
+   it "persists the user session" do
+     sign_in(user)
+
+     post :login
+
+     expect(response.body).to include("Hello, #{user.name}")
+   end
+ end
 end
