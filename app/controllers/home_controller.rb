@@ -18,6 +18,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def login
+  end
+
   private
 
   def registration_params
