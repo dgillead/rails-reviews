@@ -70,7 +70,7 @@ describe HomeController do
    it "persists the user session" do
      sign_in(user)
 
-     post :login
+     post :login_user
 
      expect(response.body).to include("Hello, #{user.name}")
    end

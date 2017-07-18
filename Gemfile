@@ -32,7 +32,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rspec-rails', '~> 3.5'
 gem 'database_cleaner'
 gem 'pry'
-gem 'pry-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

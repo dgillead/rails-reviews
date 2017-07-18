@@ -22,7 +22,8 @@ class HomeController < ApplicationController
   end
 
   def login_user
-    user = User.find_by(login_params).try(:autheticate, params[:password])
+    binding.pry
+    user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
     if user
       session[:user_id] = user.id
       redirect_to '/'
@@ -35,9 +36,5 @@ class HomeController < ApplicationController
 
   def registration_params
     params.permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def login_params
-    params.permit(:email, :password_digest)
   end
 end
