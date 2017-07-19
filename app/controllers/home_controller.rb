@@ -22,7 +22,6 @@ class HomeController < ApplicationController
   end
 
   def login_user
-    binding.pry
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
     if user
       session[:user_id] = user.id
@@ -30,6 +29,11 @@ class HomeController < ApplicationController
     else
       render :login
     end
+  end
+
+  def logout
+    session.clear
+    redirect_to '/login'
   end
 
   private

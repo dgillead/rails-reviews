@@ -4,7 +4,10 @@ describe HomeController do
   render_views
 
   describe "GET index" do
+    let!(:user) { User.create!(name: "Dan", email: "test@codeplatoon.com", password: "abc1234") }
+
     it "shows a welcome message" do
+      sign_in(user)
       get :index
 
       expect(response.body).to include("Welcome")
@@ -65,14 +68,24 @@ describe HomeController do
   end
 
   describe "POST /login" do
-   let!(:user) { User.create!(name: "Dan", email: "test@codeplatoon.com", password: "abc1234") }
+    let!(:user) { User.create!(name: "Dan", email: "test@codeplatoon.com", password: "abc1234") }
 
    it "persists the user session" do
      sign_in(user)
+     params = { email: user.email, password: user.password }
 
      post :login_user
 
      expect(response.body).to include("Hello, #{user.name}")
+   end
+
+   it "shows the login form again when unsuccessful, with a different status code" do
+     user.password = 'not the right password'
+     sign_in(user)
+
+     post :login_user
+
+     expect(response.body).to include("Log In")
    end
  end
 end
